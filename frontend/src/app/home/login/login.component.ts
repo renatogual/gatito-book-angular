@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { AuthService } from 'src/app/auth/auth.service';
 
@@ -12,14 +13,14 @@ export class LoginComponent implements OnInit {
   user: string = ''
   password: string = ''
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
   }
 
   login() {
     this.authService.authenticate(this.user, this.password).subscribe({
-      next: (result) => console.log('login successful', result),
+      next: (result) => this.router.navigate(['animals']),
       error: (error) => console.log('login error', error)
     })
 
